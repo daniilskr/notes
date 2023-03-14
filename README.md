@@ -27,9 +27,9 @@ class FullNameFormatter {
 
 class Factory
 {
+  ...
   public function makeFullName($user) {
     return new FullNameFormatter(...); 
   }
-  ...
 }
 ```
