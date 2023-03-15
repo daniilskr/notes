@@ -8,28 +8,29 @@
 
 Плохо:
 ```php
-class UserNameFormattingService
+// Набор совершенно несвязанных между собой методов
+class CommentsService
 {
-  public function fullName($user) { ... }
-  public function firstAndLastName($user) { ... }
-  public function firstName($user) { ... }
+    ...
+    public function getComment(int $id) { ... }
+    ...
+    public function markAsSpam(Comment $comment) { ... }
 }
 ```
 
 Хорошо:
 ```php
-namespace UserNameFormatter; 
-
-class FullNameFormatter {
-  ...
-  public function format($user) { ... }
+// Происходит от паттерна Repository - все методы связаны с хранением объектов одного типа
+class CommentsRepository
+{
+    ...
+    public function getComment(int $id) { ... }
 }
 
-class Factory
+// Происходит от глагола - все методы будут связаны с "помечанием" (to mark) комментариев как "спам"
+class CommentsSpamMarker
 {
-  ...
-  public function makeFullName() {
-    return new FullNameFormatter(...); 
-  }
+    ...
+    public function markAsSpam(Comment $comment) { ... }
 }
 ```
