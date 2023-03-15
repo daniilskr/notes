@@ -4,7 +4,7 @@
 ### Сервисы
 Название сервиса ни в коем случае не должно заканчиваться на "*Service". Обычно это признак того,
 что вы только что создали свалку для слабо связанных между собой методов.
-Вместо этого название сервиса должно происходить от глагола или [паттерна (Factory, Policy, Strategy, Builder, etc)](https://en.wikipedia.org/wiki/Software_design_pattern)
+Вместо этого название сервиса должно происходить от глагола или [паттерна (Factory, Strategy, Builder, etc)](https://en.wikipedia.org/wiki/Software_design_pattern)
 
 Плохо:
 ```php
