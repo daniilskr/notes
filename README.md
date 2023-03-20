@@ -114,8 +114,13 @@ class UserCommentBanhamer
             $unitOfWork[] = $dto;
         }
         
+        ...
+        
         // Мы не используем отношения, а получаем все модели из DTO.
-        $this->doSomething($dto);
+        foreach (array_filter($unitOfWork, $this->shouldDoSomething(...)) as $dto)
+        {
+            $this->doSomething($dto);
+        }
         
         // Наличие UnitOfWork позволяет отложить и не растягивать транзакцию на всё время исполнения
         $this->flush($unitOfWork);
@@ -135,7 +140,7 @@ class UserCommentBanhamer
         DB::transaction(function () use ($unitOfWork) {
             // Используем данные из UnitOfWork для формирования связей между моделями
             foreach ($unitOfWork as $dto) {
-                $dto->user->messages->save($dto->message);
+                $dto->user->messages()->save($dto->message);
                 $dto->user->save();
                 $dto->comment->save();
             }
