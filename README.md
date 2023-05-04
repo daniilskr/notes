@@ -129,7 +129,7 @@ class UserCommentBanhamer
     protected function banUserComment(DTO $dto)
     {
         // ->message это связь, которую мы можем отложить на попозже благодаря UnitOfWork
-        $dto->message = new Message(['text' => ['You are banned because of your', new BBLink('comment', route('comments', [$dto->comment->id]))]]);
+        $dto->message = new Message(['text' => ['You are banned because of your', new Link('comment', route('comments', [$dto->comment->id]))]]);
         $dto->user->dtBanEnds = now()->addDays(7);
         $dto->comment->isBanned = true;
         // Пока ничего не сохраняем
